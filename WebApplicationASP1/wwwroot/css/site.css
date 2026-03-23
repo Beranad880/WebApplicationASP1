@@ -277,63 +277,100 @@ h2 {
         background-color: #fafafa;
     }
 
+.products-table tr {
+    transition: var(--transition);
+}
+
+.products-table tr:hover {
+    box-shadow: inset 4px 0 0 0 var(--primary);
+}
+
 .id-cell code {
     font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    background: var(--bg);
-    padding: 0.2rem 0.4rem;
+    background: #f1f5f9;
+    padding: 0.25rem 0.5rem;
     border-radius: var(--radius-sm);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     border: 1px solid var(--border);
+    display: inline-block;
 }
 
 .product-sku {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--primary);
     font-weight: 700;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.25rem;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: var(--primary-light);
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
 }
 
 .product-name {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text);
-    font-size: 0.95rem;
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
 }
 
 .product-description-short {
-    font-size: 0.8rem;
+    font-size: 0.825rem;
     color: var(--text-muted);
-    margin-top: 0.2rem;
-    max-width: 300px;
+    max-width: 320px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.4;
 }
 
 .category-badge {
     display: inline-block;
-    padding: 0.2rem 0.6rem;
-    background: var(--primary-light);
-    color: var(--primary);
-    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.75rem;
+    background: #f1f5f9;
+    color: var(--text-muted);
+    border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.category-badge:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
 }
 
 .price-cell {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text);
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+.price-cell::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--primary-light);
+    margin-top: 2px;
 }
 
 .stock-indicator {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    font-weight: 500;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
     color: var(--success);
+    padding: 0.35rem 0.75rem;
+    background: #ecfdf5;
+    border-radius: var(--radius-sm);
 }
 
     .stock-indicator::before {
@@ -342,22 +379,27 @@ h2 {
         height: 8px;
         background: var(--success);
         border-radius: 50%;
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #10b98144;
     }
 
     .stock-indicator.out {
         color: var(--danger);
+        background: #fef2f2;
     }
 
         .stock-indicator.out::before {
             background: var(--danger);
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ef444444;
         }
 
     .stock-indicator.low {
-        color: #f59e0b; /* Amber/Orange */
+        color: #b45309;
+        background: #fffbeb;
     }
 
         .stock-indicator.low::before {
             background: #f59e0b;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #f59e0b44;
         }
 
 .table-actions {

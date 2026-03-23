@@ -1,0 +1,54 @@
+@page
+@model WebApplicationASP1.Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "Správa kategorií";
+}
+
+<div class="title-row">
+    <h1>Kategorie</h1>
+    <div class="header-actions">
+        <a asp-page="/Products/Index" class="back-link" style="margin-bottom: 0;">Zpět na položky</a>
+    </div>
+</div>
+
+<div class="table-container">
+    <table class="products-table">
+        <thead>
+            <tr>
+                <th>Název kategorie</th>
+                <th>Popis</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td data-label="Název">
+                        <span class="category-badge">@item.Name</span>
+                    </td>
+                    <td data-label="Popis">
+                        <div class="product-description-short">@item.Description</div>
+                    </td>
+                    <td data-label="Akce">
+                        <div class="table-actions">
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" onsubmit="return confirm('Opravdu chcete smazat tuto kategorii?');">
+                                <button type="submit" class="btn-icon btn-icon-danger" title="Smazat">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Categories.Any())
+{
+    <div class="empty-state">
+        <p>Žádné kategorie nebyly vytvořeny.</p>
+        <p>Kategorie můžete přidat při vytváření nebo úpravě produktu.</p>
+    </div>
+}
