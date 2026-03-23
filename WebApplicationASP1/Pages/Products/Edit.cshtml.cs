@@ -50,4 +50,21 @@ public class EditModel : PageModel
 
         return RedirectToPage("./Index");
     }
+
+    public async Task<JsonResult> OnPostCreateCategoryAsync([FromBody] Category category)
+    {
+        if (string.IsNullOrWhiteSpace(category.Name))
+        {
+            return new JsonResult(new { success = false, message = "Název kategorie je povinný." });
+        }
+
+        var existing = (await _categoryService.GetAllAsync()).FirstOrDefault(c => c.Name.Equals(category.Name, StringComparison.OrdinalIgnoreCase));
+        if (existing != null)
+        {
+            return new JsonResult(new { success = false, message = "Kategorie již existuje." });
+        }
+
+        await _categoryService.CreateAsync(category);
+        return new JsonResult(new { success = true, name = category.Name });
+    }
 }
