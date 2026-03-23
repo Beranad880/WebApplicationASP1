@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using WebApplicationASP1.Models;
 using WebApplicationASP1.Services;
+using WebApplicationASP1.test;
 
 namespace WebApplicationASP1.Controllers;
 
@@ -9,10 +11,14 @@ namespace WebApplicationASP1.Controllers;
 public sealed class ProductsController : ControllerBase
 {
     private readonly ProductService _productService;
+    private readonly IMyTax _tax;
 
-    public ProductsController(ProductService productService) =>
+    public ProductsController(ProductService productService,IMyTax tax )
+    {
         _productService = productService;
+        _tax = tax;
 
+    }
     // GET /api/products
     [HttpGet]
     public async Task<ActionResult<List<Product>>> GetAll() =>
@@ -53,4 +59,23 @@ public sealed class ProductsController : ControllerBase
         var deleted = await _productService.DeleteAsync(id);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpGet("{id}/tax")]
+    public async Task<IActionResult> GetPriceWithTax(string id)
+    {
+        var product = await _productService.GetByIdAsync(id);
+
+        if (product is null)
+            return NotFound();
+
+        return Ok(new
+        {
+            productId = id,
+            price = product.Price,
+            taxRate = _tax.DefaultTaxRate,
+            priceWithTax = _tax.GetPriceWithTax(product.Price)
+        });
+    }
 }
+
+

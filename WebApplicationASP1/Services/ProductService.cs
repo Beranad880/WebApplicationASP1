@@ -19,7 +19,7 @@ public sealed class ProductService
 
     public async Task<List<Product>> GetAllAsync() =>
         await _products.Find(_ => true).ToListAsync();
-
+        
     public async Task<Product?> GetByIdAsync(string id) =>
         await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -41,4 +41,6 @@ public sealed class ProductService
         var result = await _products.DeleteOneAsync(p => p.Id == id);
         return result.DeletedCount > 0;
     }
+
+
 }
