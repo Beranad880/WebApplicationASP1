@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cd \"D:/soft/dotnet/WebApplicationASP1/WebApplicationASP1\" && dotnet restore 2>&1)",
-      "Bash(cd \"D:/soft/dotnet/WebApplicationASP1/WebApplicationASP1\" && dotnet build --no-restore 2>&1)"
-    ]
-  }
-}
