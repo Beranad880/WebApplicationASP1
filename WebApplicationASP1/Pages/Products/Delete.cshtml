@@ -1,0 +1,31 @@
+@page "{id}"
+@model WebApplicationASP1.Pages.Products.DeleteModel
+@{
+    ViewData["Title"] = "Smazat produkt";
+}
+
+<div class="title-row">
+    <h1>Smazat produkt</h1>
+    <a asp-page="Index">Zpět na seznam</a>
+</div>
+
+<div class="centered-container" style="text-align: center;">
+    <div class="card">
+        <h2 style="margin-bottom: 2rem; letter-spacing: -0.02em;">Opravdu chcete smazat tento produkt?</h2>
+        <div style="margin-bottom: 3rem; text-align: left; padding: 1rem; border-left: 2px solid var(--text);">
+            <p style="margin-bottom: 0.5rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700;">Název</p>
+            <p style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;">@Model.Product.Name</p>
+            
+            <p style="margin-bottom: 0.5rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700;">Cena</p>
+            <p style="font-size: 1.25rem; font-weight: 600;">@Model.Product.Price.ToString("C")</p>
+        </div>
+
+        <form method="post">
+            <input type="hidden" asp-for="Product.Id" />
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn-danger" style="flex: 1;">Potvrdit smazání</button>
+                <a asp-page="Index" class="btn-primary" style="flex: 1; text-align: center;">Zrušit</a>
+            </div>
+        </form>
+    </div>
+</div>

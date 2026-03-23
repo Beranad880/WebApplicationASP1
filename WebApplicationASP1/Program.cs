@@ -16,15 +16,19 @@ builder.Services.Configure<TaxSettings>(
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<IMyTax, MyTaxImpl>();
 builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
+app.MapRazorPages();
 app.MapGet("/", (HttpContext ctx) =>
 {
-    ctx.Response.Redirect("/api/products");
+    ctx.Response.Redirect("/Products");
     return Task.CompletedTask;
 });
 app.Run();

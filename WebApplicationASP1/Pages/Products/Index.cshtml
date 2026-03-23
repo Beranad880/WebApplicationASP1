@@ -1,0 +1,30 @@
+@page
+@model WebApplicationASP1.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Seznam produktů";
+}
+
+<div class="title-row">
+    <h1>Položky</h1>
+    <a asp-page="Create" class="btn-primary">Přidat položky</a>
+</div>
+
+<div class="products-grid">
+    @foreach (var item in Model.Products)
+    {
+        <div class="card">
+            <h3>@item.Name</h3>
+            <div class="price">@item.Price.ToString("C")</div>
+            <p class="description">@item.Description</p>
+            <div class="card-actions">
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-primary">Upravit</a>
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn-danger">Smazat</a>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Products.Any())
+{
+    <p style="text-align: center; color: var(--text-muted); padding: 3rem;">Žádné produkty nebyly nalezeny. Zkuste nějaký přidat!</p>
+}
