@@ -6,15 +6,25 @@
 
 <div class="title-row">
     <h1>Položky</h1>
-    <a asp-page="Create" class="btn-primary">Přidat položky</a>
+    <a asp-page="Create" class="btn-primary">Přidat položku</a>
 </div>
+
+<form method="get" class="search-container">
+    <input type="text" name="SearchString" value="@Model.SearchString" placeholder="Hledat podle názvu nebo popisu..." class="search-input" />
+    <button type="submit" class="btn-primary">Hledat</button>
+    @if (!string.IsNullOrEmpty(Model.SearchString))
+    {
+        <a asp-page="./Index" class="btn-danger">Zrušit</a>
+    }
+</form>
 
 <div class="products-grid">
     @foreach (var item in Model.Products)
     {
         <div class="card">
+            <div class="stock-badge">Skladem: @item.Stock ks</div>
             <h3>@item.Name</h3>
-            <div class="price">@item.Price.ToString("C")</div>
+            <div class="price">@item.Price.ToString("N2") Kč</div>
             <p class="description">@item.Description</p>
             <div class="card-actions">
                 <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-primary">Upravit</a>
@@ -26,5 +36,15 @@
 
 @if (!Model.Products.Any())
 {
-    <p style="text-align: center; color: var(--text-muted); padding: 3rem;">Žádné produkty nebyly nalezeny. Zkuste nějaký přidat!</p>
+    <div class="empty-state">
+        <p>Nebyly nalezeny žádné položky.</p>
+        @if (!string.IsNullOrEmpty(Model.SearchString))
+        {
+            <a asp-page="./Index" class="btn-primary">Zobrazit vše</a>
+        }
+        else
+        {
+            <a asp-page="Create" class="btn-primary">Přidat první položku</a>
+        }
+    </div>
 }

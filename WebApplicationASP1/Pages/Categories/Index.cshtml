@@ -1,0 +1,31 @@
+@page
+@model WebApplicationASP1.Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "Správa kategorií";
+}
+
+<div class="title-row">
+    <h1>Kategorie</h1>
+    <a asp-page="Create" class="btn-primary">Přidat kategorii</a>
+</div>
+
+<div class="products-grid">
+    @foreach (var item in Model.Categories)
+    {
+        <div class="card">
+            <h3>@item.Name</h3>
+            <p class="description">@item.Description</p>
+            <div class="card-actions">
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-primary">Upravit</a>
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn-danger">Smazat</a>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Categories.Any())
+{
+    <div style="text-align: center; padding: 5rem 0; border: 1px dashed var(--border);">
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Žádné kategorie nebyly vytvořeny.</p>
+    </div>
+}

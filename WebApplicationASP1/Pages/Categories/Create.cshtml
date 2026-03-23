@@ -1,0 +1,30 @@
+@page
+@model WebApplicationASP1.Pages.Categories.CreateModel
+@{
+    ViewData["Title"] = "Nová kategorie";
+}
+
+<div class="title-row">
+    <h1>Vytvořit kategorii</h1>
+    <a asp-page="Index">Zpět na seznam</a>
+</div>
+
+<div class="centered-container">
+    <div class="card">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Category.Name">Název</label>
+                <input asp-for="Category.Name" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Category.Description">Popis</label>
+                <textarea asp-for="Category.Description" rows="4"></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <button type="submit" class="btn-primary" style="flex: 1;">Uložit kategorii</button>
+                <a asp-page="Index" class="btn-danger" style="flex: 1; text-align: center;">Zrušit</a>
+            </div>
+        </form>
+    </div>
+</div>

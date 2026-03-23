@@ -14,6 +14,7 @@ builder.Services.Configure<TaxSettings>(
 // Register ProductService as a singleton — MongoClient is thread-safe
 // and meant to be reused for the lifetime of the application
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<IMyTax, MyTaxImpl>();
 builder.Services.AddControllers();
 builder.Services.AddRazorPages();
